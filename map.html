@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    <style type="text/css">
+    html {
+        height: 100%
+    }
+    body {
+        height: 100%;
+        margin: 0;
+        padding: 0
+    }
+    #map-canvas {
+        height: 100%
+    }
+    </style>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDPgeswSLqlvGvCs6kGb-hHhzuCOURHquU">
+    </script>
+    <script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript">
+    var map;
+
+    function initialize() {
+
+        var mapOptions = {
+            center: new google.maps.LatLng(-27.4364229, 153.0010731),
+            zoom: 14
+        };
+        map = new google.maps.Map(document.getElementById("map-canvas"),
+            mapOptions);
+
+        google.maps.event.addListener(map, 'idle', function(ev){
+        
+        // http://stackoverflow.com/questions/6910847/get-boundaries-longitude-and-latitude-from-current-zoom-google-maps
+        var bounds = map.getBounds();
+        var ne = bounds.getNorthEast(); // LatLng of the north-east corner
+        var sw = bounds.getSouthWest(); // LatLng of the south-west corder
+        var nw = new google.maps.LatLng(ne.lat(), sw.lng());
+        var se = new google.maps.LatLng(sw.lat(), ne.lng());
+
+        $.getJSON("index.php?minLat="+nw.lat()+"&maxLat="+se.lat()+"&minLong="+nw.lng()+"&maxLong="+se.lng(), function(data) {
+
+            data = data.data;
+            for (var i = 0; i < data.length; i++) {
+                var myLatlng = new google.maps.LatLng(data[i].LATITUDE, data[i].LONGITUDE);
+                var marker = new google.maps.Marker({
+                    position: myLatlng,
+                    map: map,
+                    title: data[i].ITEM_TYPE
+                });
+                marker.setMap(map);
+            }
+            
+            //var myLatlng = new google.maps.LatLng(data[0].LATITUDE, data[0].LONGITUDE);
+            //map.setCenter(myLatlng);
+
+        });
+
+    });
+
+    }
+    google.maps.event.addDomListener(window, 'load', initialize);
+
+    
+
+    $.getJSON("index.php?useAPI=true&PR_NO=D0009&limit=250", function(data) {
+
+        data = data.data;
+        for (var i = 0; i < data.length; i++) {
+            var myLatlng = new google.maps.LatLng(data[i].LATITUDE, data[i].LONGITUDE);
+            var marker = new google.maps.Marker({
+                position: myLatlng,
+                map: map,
+                title: data[i].ITEM_TYPE
+            });
+            marker.setMap(map);
+        }
+        
+        var myLatlng = new google.maps.LatLng(data[0].LATITUDE, data[0].LONGITUDE);
+        map.setCenter(myLatlng);
+    });
+    </script>
+</head>
+
+<body>
+    <div id="map-canvas" />
+</body>
+
+</html>

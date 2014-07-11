@@ -1,0 +1,709 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"current",
+				"currentProjectName"
+			],
+			[
+				"marg",
+				"margin-top"
+			],
+			[
+				"font",
+				"font-size"
+			],
+			[
+				"padd",
+				"padding-bottom"
+			],
+			[
+				"lo",
+				"logging"
+			],
+			[
+				"currentPro",
+				"currentProjectTaskId"
+			],
+			[
+				"obj",
+				"object"
+			],
+			[
+				"days",
+				"daysDiff"
+			],
+			[
+				"get",
+				"getTime"
+			],
+			[
+				"appen",
+				"appendToCommunityTimeline"
+			],
+			[
+				"re",
+				"return"
+			],
+			[
+				"loadCommuni",
+				"loadCommunityTimeline"
+			],
+			[
+				"progre",
+				"progress_id"
+			],
+			[
+				"taskpro",
+				"taskProgress"
+			],
+			[
+				"progressDe",
+				"progressDescription"
+			],
+			[
+				"paddin",
+				"padding-top"
+			],
+			[
+				"back",
+				"background-color"
+			],
+			[
+				"all",
+				"allTasks"
+			],
+			[
+				"click",
+				"clickTarget"
+			],
+			[
+				"foll",
+				"followingUser"
+			],
+			[
+				"taskDueDa",
+				"taskDueDateForm"
+			],
+			[
+				"bac",
+				"background-size"
+			],
+			[
+				"progressDa",
+				"progressData"
+			],
+			[
+				"previo",
+				"previousTask"
+			],
+			[
+				"progress",
+				"progressResults"
+			],
+			[
+				"profile",
+				"profilePicture"
+			],
+			[
+				"prof",
+				"profilePhoto"
+			],
+			[
+				"pro",
+				"progressStreak"
+			],
+			[
+				"la",
+				"label"
+			],
+			[
+				"toggle",
+				"fadeToggle"
+			],
+			[
+				"Project",
+				"ProjectTasks"
+			],
+			[
+				"task",
+				"taskProgressFile"
+			],
+			[
+				"user",
+				"userFollowers"
+			],
+			[
+				"cur",
+				"current"
+			],
+			[
+				"newTask",
+				"newTaskForm"
+			],
+			[
+				"prj",
+				"prjDate"
+			],
+			[
+				"ge",
+				"get	Get Elements"
+			],
+			[
+				"len",
+				"length"
+			],
+			[
+				"in",
+				"inline-block"
+			],
+			[
+				"text",
+				"text-align"
+			],
+			[
+				"sre",
+				"streakChart"
+			],
+			[
+				"strea",
+				"streakChart"
+			],
+			[
+				"curr",
+				"current"
+			],
+			[
+				"folo",
+				"followingUser"
+			],
+			[
+				"follow",
+				"followingUser"
+			],
+			[
+				"followin",
+				"userFollowing"
+			],
+			[
+				"loadProject",
+				"loadProjectWithUser"
+			],
+			[
+				"margn",
+				"margin-top"
+			],
+			[
+				"border-r",
+				"border-right"
+			],
+			[
+				"ma",
+				"max-width"
+			],
+			[
+				"mar",
+				"margin-top"
+			],
+			[
+				"margin",
+				"margin-top"
+			],
+			[
+				"tas",
+				"taskDate"
+			],
+			[
+				"bor",
+				"border"
+			],
+			[
+				"fu",
+				"function"
+			],
+			[
+				"border",
+				"border-radius"
+			],
+			[
+				"newPro",
+				"newProjectForm"
+			],
+			[
+				"new",
+				"newProjectForm"
+			],
+			[
+				"project",
+				"projectDeadline"
+			],
+			[
+				"proje",
+				"projectNameForm"
+			],
+			[
+				"pad",
+				"padding-left"
+			],
+			[
+				"padding",
+				"padding-top"
+			],
+			[
+				"te",
+				"testAPI"
+			],
+			[
+				"bord",
+				"border-left"
+			],
+			[
+				"wid",
+				"width"
+			],
+			[
+				"fot",
+				"font-size"
+			],
+			[
+				"font-",
+				"font-family"
+			],
+			[
+				"margi",
+				"margin-top"
+			],
+			[
+				"min-",
+				"min-height"
+			],
+			[
+				"wi",
+				"width"
+			],
+			[
+				"image",
+				"imageUploadButton"
+			],
+			[
+				"mysq",
+				"mysql_error"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"settings":
+			{
+				"buffer_size": 0,
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "",
+	"command_palette":
+	{
+		"height": 392.0,
+		"selected_items":
+		[
+			[
+				"ins",
+				"Package Control: Install Package"
+			],
+			[
+				"insta",
+				"Package Control: Install Package"
+			],
+			[
+				"pack",
+				"Package Control: Install Package"
+			],
+			[
+				"upda",
+				"Package Control: Upgrade/Overwrite All Packages"
+			],
+			[
+				"add repo",
+				"Package Control: Add Repository"
+			],
+			[
+				"packa",
+				"Package Control: Upgrade Package"
+			]
+		],
+		"width": 575.0
+	},
+	"console":
+	{
+		"height": 174.0,
+		"history":
+		[
+			"import urllib.request,os,hashlib; h = '7183a2d3e96f11eeadd761d777e62404' + 'e330c659d4bb41d3bdf022e94cab3cd0'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://sublime.wbond.net/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/Users/Andx/Documents/Work/Project Ideas/Sweetpea/site/js/lp/feedback.js",
+		"/Users/Andx/Documents/Work/Project Ideas/Sweetpea/site/js/lp/lightpost.js",
+		"/Users/Andx/Documents/Work/Project Ideas/Sweetpea/site/js/lp/post_ad.js",
+		"/Users/Andx/Documents/Work/Project Ideas/Sweetpea/site/js/lp/globals.js",
+		"/Users/Andx/Documents/Work/Project Ideas/Sweetpea/site/js/lp/watchlist.js",
+		"/Users/Andx/Library/Application Support/Sublime Text 3/Packages/User/Preferences.sublime-settings",
+		"/Users/Andx/Documents/Work/Project Ideas/Tuition/web/tuition.js",
+		"/Users/Andx/Desktop/Mix - Not Backed Up/IOQ3/code/qcommon/deco3850.c",
+		"/Volumes/NO NAME/main.c",
+		"/Users/Andx/Desktop/Mix - Not Backed Up/IOQ3/code/qcommon/common.c",
+		"/Users/Andx/Desktop/Mix - Not Backed Up/IOQ3/code/client/cl_main.c",
+		"/Users/Andx/Desktop/Mix - Not Backed Up/IOQ3/code/renderergl2/tr_init.c",
+		"/Users/Andx/Desktop/Mix - Not Backed Up/IOQ3/code/q3_ui/ui_video.c",
+		"/Users/Andx/Desktop/Mix - Not Backed Up/IOQ3/code/q3_ui/ui_setup.c",
+		"/Users/Andx/Desktop/Mix - Not Backed Up/IOQ3/code/q3_ui/ui_menu.c",
+		"/Users/Andx/Desktop/Mix - Not Backed Up/IOQ3/code/ui/ui_main.c",
+		"/Users/Andx/Desktop/Mix - Not Backed Up/IOQ3/code/q3_ui/ui_main.c",
+		"/Users/Andx/Desktop/Mix - Not Backed Up/IOQ3/code/q3_ui/ui_display.c",
+		"/Users/Andx/Dropbox/UQ/2014/DECO7385/IOQ3/code/qcommon/deco3850.c",
+		"/Users/Andx/Downloads/changes (2).diff",
+		"/Users/Andx/Documents/Work/Italian Week/2014/ItalianWeek2013-N2.html",
+		"/private/var/folders/ch/74lwtkdn4x12czffwtv31b1r0000gn/T/fz3temp-1/submit_iscrizione.php",
+		"/private/var/folders/ch/74lwtkdn4x12czffwtv31b1r0000gn/T/fz3temp-1/iscrizioni.php",
+		"/Users/Andx/Downloads/changes.diff",
+		"/Users/Andx/Dropbox/UQ/2014/DECO7385/IOQ3/code/client/cl_main.c",
+		"/Users/Andx/Dropbox/UQ/2014/DECO7385/IOQ3/code/ui/ui_main.c",
+		"/Users/Andx/Dropbox/UQ/2014/DECO7385/IOQ3/code/server/sv_client.c",
+		"/Users/Andx/Dropbox/UQ/2014/DECO7385/IOQ3/code/game/g_client.c",
+		"/Users/Andx/Downloads/DECO1400_Prac9/index.html",
+		"/Users/Andx/Downloads/ItalianWeek2013-N2.html",
+		"/Users/Andx/Downloads/Week 8/index.html",
+		"/Users/Andx/Dropbox/UQ/2014/DECO7385/IOQ3/README.md",
+		"/private/var/folders/ch/74lwtkdn4x12czffwtv31b1r0000gn/T/fz3temp-1/index.php",
+		"/Users/Andx/Documents/Work/Cascinarmangiando/2014/submit_iscrizione.php",
+		"/Users/Andx/Documents/Work/Cascinarmangiando/2014/index_close.php",
+		"/Users/Andx/Documents/Work/Cascinarmangiando/2014/iscrizioni.php",
+		"/Users/Andx/Documents/Work/Cascinarmangiando/2013/iscrizioni.php",
+		"/Users/Andx/Dropbox/UQ/2014/CSSE7301/Pracs/udp-tcp-bridge-mac-v0.2.1/data/settings.xml",
+		"/Users/Andx/Dropbox/UQ/2014/CSSE7301/Pracs/reacTIVision-1.4/reacTIVision.app/Contents/Resources/reacTIVision.xml",
+		"/Users/Andx/Downloads/reacTIVision-1.4/reacTIVision.app/Contents/Resources/reacTIVision.xml",
+		"/private/var/folders/ch/74lwtkdn4x12czffwtv31b1r0000gn/T/fz3temp-1/preview.php",
+		"/Users/Andx/Downloads/preview.php",
+		"/Users/Andx/Dropbox/UQ/2014/DECO7385/Socket/plugins/macro.lua",
+		"/Users/Andx/Dropbox/UQ/2014/DECO7385/Socket/plugins/core/init.lua",
+		"/Users/Andx/Dropbox/UQ/2014/DECO7385/Socket/plugins/common.lua",
+		"/Users/Andx/Dropbox/UQ/2014/DECO7385/Socket/plugins/constants.lua",
+		"/Users/Andx/Dropbox/UQ/2014/DECO7385/Socket/plugins/sha2.lua",
+		"/Users/Andx/Dropbox/UQ/2014/DECO7385/HardwareDev/TransposeBase_Teensy/TransposeBase_Teensy/Sketchbook/Libraries/RF24/examples/GettingStarted/GettingStarted.pde",
+		"/Users/Andx/Dropbox/UQ/2014/CSSE7301/SVN/csse3010/np2/examples/ex16_fr_queue/main.c",
+		"/Users/Andx/Dropbox/UQ/2014/CSSE7301/SVN/csse3010/np2/examples/ex15_fr_semaphore/main.c",
+		"/Applications/Arduino.app/Contents/Resources/Java/hardware/arduino/boards.txt",
+		"/Users/Andx/Downloads/IteadBT_Master_Mode/IteadBT_Master_Mode.pde",
+		"/Users/Andx/Downloads/webduino-1.7/readme.md",
+		"/Users/Andx/Downloads/aaronds-arduino-nrf24l01-914e46a/Mirf/examples/ping_client/ping_client.pde",
+		"/Users/Andx/Downloads/aaronds-arduino-nrf24l01-914e46a/Mirf/Mirf.cpp",
+		"/Users/Andx/Downloads/aaronds-arduino-nrf24l01-914e46a/Mirf/Mirf.h",
+		"/Users/Andx/Dropbox/UQ/S1 2014/DECO7385/Hardware Dev/Libraries/debug_printf.c",
+		"/Users/Andx/Downloads/aaronds-arduino-nrf24l01-914e46a/Mirf/examples/reg_read/reg_read.pde",
+		"/Users/Andx/Dropbox/UQ/S1 2014/DECO7385/Hardware Dev/nrf24l01plus/nrf24l01plus.c",
+		"/private/var/folders/ch/74lwtkdn4x12czffwtv31b1r0000gn/T/fz3temp-1/default.asp",
+		"/Users/Andx/Dropbox/Work/NEP Riccardo/saracenodemetrio/Inc/PageHeader.inc",
+		"/Users/Andx/Dropbox/Work/NEP Riccardo/newenergypower.biz/Backoffice/Home.asp",
+		"/private/var/folders/ch/74lwtkdn4x12czffwtv31b1r0000gn/T/fz3temp-1/checklogin.php",
+		"/Teensy/teensy3/mk20dx128.c",
+		"/Users/Andx/Downloads/Teensy 3.1 (1).fzpz",
+		"/private/var/folders/ch/74lwtkdn4x12czffwtv31b1r0000gn/T/untitled7339559151508816072.tmp/sketch_apr07a/sketch_apr07a.ino",
+		"/Users/Andx/Dropbox/UQ/S2 2013/DECO7180/Retrospector/AppDev/js/retrospector.js",
+		"/Users/Andx/Downloads/week4/section.html",
+		"/Users/Andx/Downloads/hamming-0.3/hamming.c",
+		"/Users/Andx/Documents/Work/Project Ideas/DemoCode/JS/post_ad.js"
+	],
+	"find":
+	{
+		"height": 29.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			".yes",
+			"progressData",
+			"progress",
+			"addFollowButton",
+			"followButt",
+			"query.",
+			"userFollowing",
+			"followingButtons",
+			"addFollowButton",
+			"userColors",
+			"userPinPhoto",
+			"hover",
+			"loadCommunityTimeline",
+			"timeline",
+			"loadTimeline",
+			"load",
+			"loadCommunityProjects",
+			"loadProjectUpdatesWithUser",
+			"channel",
+			"drawTimer",
+			"calculateStreak",
+			"streak",
+			", true",
+			"milestone",
+			"loadCommunityTimeline",
+			"loadProjects",
+			"loadProjectsData",
+			"loadCommunityTimelineUsers",
+			"timeline",
+			"taskCompleted",
+			"#popup",
+			"timeline",
+			"progressDetails",
+			"loadProjectDetails",
+			"data:",
+			"userCard",
+			"loadProjectDetails",
+			"userCard",
+			"loadTimelineData",
+			"popupTimeline",
+			"loadTimelineData",
+			"loadProjectsData",
+			"popup",
+			"loadProjectsData",
+			"addClass",
+			"following",
+			"followingUser[",
+			"updates",
+			"userCard",
+			"loadProjectDetails",
+			"addFollowButton",
+			"followingButtons",
+			"loadProjectSettings",
+			"userCard",
+			";\n",
+			"loadCommunityPro",
+			"yyyy",
+			"datepicker",
+			"newProje",
+			"$(document.",
+			"appen",
+			"loadProjectsData",
+			"255, 255, 255",
+			"generateGradient",
+			"'",
+			"0, 0, 0",
+			"generateGradient",
+			"userCard",
+			"progress",
+			"loadProjectsData",
+			"newProject",
+			"streak",
+			"console.log",
+			"calculateStr",
+			"streak",
+			"loadCommunity",
+			"loadProjectsData",
+			"loadUpload",
+			"uploadPro",
+			"generateProjectTimeline",
+			"loadProjectsData",
+			"loadProject",
+			"dueDate",
+			"currentTask",
+			"drawTimer",
+			"updates",
+			"position: absolute",
+			"length",
+			"loadProjectWithUser",
+			"loadCommunityPro",
+			"calculateStrea",
+			"days",
+			"calculateStreak",
+			"pload",
+			"task",
+			"position: fix",
+			"loadProjects",
+			"uploadPro",
+			"addUserUpdate",
+			"followNewUser",
+			"userFollowing",
+			"isFollowing",
+			"projectData",
+			"absolute",
+			".mainContent",
+			"loadCommunityProjects",
+			"userCard",
+			".id",
+			"loadComm",
+			"$(document.body).on(\"click\", \"a.followNewUser\", function() {",
+			"popup",
+			"projectSettings",
+			"settings",
+			"followNewUser",
+			"div.container",
+			"community",
+			"streak",
+			"streakChart",
+			"streak",
+			"loadStreak",
+			"loadProjectsDa",
+			"loadProj",
+			"diff",
+			"newProject",
+			"document.bo",
+			"document.",
+			"userCard",
+			"project-data"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"data-",
+			"0, 0, 0",
+			"\\\"",
+			"255, 255, 255"
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 0,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"incomplete_sync": null,
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 29.0
+	},
+	"input":
+	{
+		"height": 38.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"output.sftp":
+	{
+		"height": 142.0
+	},
+	"project": "parksapi.sublime-project",
+	"replace":
+	{
+		"height": 54.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": true,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 288.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}
