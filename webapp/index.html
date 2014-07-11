@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="./webfonts/fanwood_italic_macroman/stylesheet.css" />
+    <link rel="stylesheet" href="./webfonts/fanwood_regular_macroman/stylesheet.css" />
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDPgeswSLqlvGvCs6kGb-hHhzuCOURHquU">
+    </script>
+    <script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src="script.js"></script>
+    <script type="text/javascript">
+    var map;
+
+    function initialize() {
+
+        var mapOptions = {
+            center: new google.maps.LatLng(-27.4364229, 153.0010731),
+            zoom: 14
+        };
+        map = new google.maps.Map(document.getElementById("map-canvas"),
+            mapOptions);
+    }
+    google.maps.event.addDomListener(window, 'load', initialize);
+    
+    </script>
+</head>
+
+<body>
+    <div id="map-hover">
+        <div class="top">
+            <div class="logo"></div>
+            <div class="drag"></div>
+        </div>
+        <div class="menu">
+            <ul>
+                <li><a href="#">Near me</a></li>
+                <li><a href="#">My books</a></li>
+                <li><a href="#">Explore</a></li>
+                <li><a href="#">Wishlist</a></li>
+            </ul>
+        </div>
+
+    </div>
+    <div id="map-canvas"></div>
+</body>
+
+</html>
