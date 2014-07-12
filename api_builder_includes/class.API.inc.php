@@ -18,7 +18,7 @@ class API {
 
 	//limit default properties
 	protected $default_output_limit = 25;
-	protected $max_output_limit     = 250;
+	protected $max_output_limit     = 25000;
 
 	//order and flow default properties
 	protected $default_order_by;

@@ -5,7 +5,7 @@ body {
     height: 100%;
     margin: 0;
     padding: 0;
-    font-family: "fanwoodregular", Times, Tahoma;
+    font-family: "fanwooditalic", Times, Tahoma;
 }
 #map-canvas {
     height: 100%
@@ -19,9 +19,35 @@ body {
     left: -60%;
     background: #F5F5F5;
     z-index: 10;
-    -webkit-transition:left .5s linear;
+    -webkit-transition: left .5s linear;
     transition: left .5s linear;
     border-right: 3px solid #95C11E;
+}
+
+#map-hover-grey {
+    width: 100%;
+    height: 100%;
+    background: #575756;
+    opacity: .5;
+    z-index: 20;
+    display: none;
+    position: fixed;
+    -webkit-transition: opacity .5s linear;
+    transition: opacity .5s linear;
+}
+
+#map-hover-popup {
+    width: 40%;
+    height: 40%;
+    background: #F5F5F5;
+    border-radius: 5px;
+    display: none;
+    z-index: 40;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    margin-left: -20%;
+    margin-top: -20%;
 }
 
 #map-hover.opened {
@@ -45,6 +71,9 @@ body {
     cursor: pointer;
     margin-left: 93%;
 }
+#map-hover .menu { 
+    float: left;
+}
 #map-hover .menu ul {
     list-style: none;
     margin-left: 40px;
@@ -57,10 +86,26 @@ body {
     font-size: 20pt;
 }
 
-.menu ul li a {
+#map-hover .sideContent {
+    width: 80%;
+    height: 100%;
+}
+
+#map-hover .sideContent .topMenu ul {
+    list-style: none;
+}
+#map-hover .sideContent .topMenu ul li {
+    float: left;
+    width: 160px;
+    height: 45px;
+    font-size: 20pt;
+
+}
+
+ul li a {
     color: #B2B2B1;
     text-decoration: none;
 }
-.menu ul li a:hover {
+ul li a:hover {
     color: #575756;
 }
