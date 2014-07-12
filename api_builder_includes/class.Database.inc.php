@@ -33,6 +33,14 @@ class Database {
 	public static function close_connection(){
 		self::$mysqli->close();
 	}
+
+	//execute sql query statement. Used for INSERT and UPDATE mostly. Returns false if query fails
+	public static function execute_sql_add($query) {
+		if(self::$mysqli->query($query)) {
+			return self::$mysqli->insert_id;
+		}
+		return -1;
+	}
 	
 	//execute sql query statement. Used for INSERT and UPDATE mostly. Returns false if query fails
 	public static function execute_sql($query) {

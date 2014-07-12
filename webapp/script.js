@@ -9,7 +9,7 @@ $(document).ready(function() {
 	}
 
 	function gotCoords(p) {
-		console.log(p);
+		//console.log(p);
 		ll = new google.maps.LatLng(p.coords.latitude, p.coords.longitude);
 	}
 
@@ -59,7 +59,10 @@ $(document).ready(function() {
 					title: data[i].ITEM_TYPE
 				});
 				google.maps.event.addListener(marker, "click", function(c) {
-					
+
+					$("#new-longitute").val(c.latLng.B);
+					$("#new-latitude").val(c.latLng.k);
+
 					$("#map-hover-popup-create").toggle();
 
 				});
@@ -68,6 +71,22 @@ $(document).ready(function() {
 
 		});
 
+
+	});
+
+	$("#newBookForm").submit(function(){
+
+		event.preventDefault();
+
+		$.ajax({
+		  type: "POST",
+		  url: "/parks/addNewBook.php",
+		  data: $("#newBookForm").serialize(),
+		  success: function(d) {
+		  	console.log(d);
+		  },
+		  dataType: "JSON"
+		});
 
 	});
 
