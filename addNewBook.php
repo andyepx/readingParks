@@ -10,7 +10,8 @@
         // if you are not going to validate input, which you absolutely should if users are submitting it, then at least
         // make sure the correct values are present
         if ((isset($_POST['title']) && !empty($_POST['title'])) || 
-          (isset($_POST['bookCode']) && !empty($_POST['bookCode']))) {
+          (isset($_POST['bookCode']) && !empty($_POST['bookCode'])) || 
+          (isset($_POST['review']) && !empty($_POST['review']))) {
 
             // Open the database connection. This is what happens inside of the API class constructor
             // but if this page is simply for submitting data to the database you can just call this method
@@ -35,6 +36,20 @@
                   $get_array = Database::execute_sql_add($mysql_query_string);
                   $json_obj->newLocation = $get_array;
               }
+            
+            } else if (isset($_POST['review']) && !empty($_POST['review'])) {
+
+              $mysql_query_string = "SELECT * FROM BookLocation WHERE entryID = ".$_POST['locationRef'];
+              $get_array = Database::get_all_results($mysql_query_string);
+              
+              $mysql_query_string = "SELECT * FROM ParkData WHERE LONGITUDE = ".$get_array[0]['Longitude']." AND LATITUDE = ".$get_array[0]['Latitude'];
+              $get_array = Database::get_all_results($mysql_query_string);
+
+              $mysql_query_string = "INSERT INTO BookReview (bookCode, ReviewAuthor, Review, locationRef, locationInfo) VALUES ('".$_POST['currentCode']."', '".addslashes($_POST['yourName'])."', '".addslashes($_POST['review'])."', ".$_POST['locationRef'].", '".$get_array[0]['PARK_NAME']."')";
+                  //print_r($mysql_query_string);
+              $get_array = Database::execute_sql_add($mysql_query_string);
+              $json_obj->lastReview = $get_array;
+              
             
             } else {
             

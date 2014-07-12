@@ -116,7 +116,7 @@ p.haveBookId {
 #map-hover .sideContent {
     width: 550px;
     float: left;
-    height: 100%;
+    height: 90%;
 }
 #map-hover .sideContent .topMenu ul {
     list-style: none;
@@ -144,7 +144,7 @@ ul li a:hover {
     display: none;
 }
 div.sideContent {
-    padding-top: 20px;
+    margin-top: 20px;
 }
 .newBookForm {
     font-size: 14pt;
@@ -158,7 +158,7 @@ span#bookID {
 .newBookFrom p {
     font-size: 15pt;
 }
-input#bookCode, input#bookTitle {
+input#bookCode, input#bookTitle, input#bookCodeFind {
     border: 2px solid lightgrey;
     border-radius: 5px;
     padding: 5px;
@@ -166,7 +166,7 @@ input#bookCode, input#bookTitle {
     font-size: 16pt;
     font-family: "fanwooditalic";
 }
-input#submitCode, input#submitTitle {
+input#submitCode, input#submitTitle, input#submitReview {
     border: 1px solid lightgrey;
     border-radius: 5px;
     padding: 5px;
@@ -175,6 +175,46 @@ input#submitCode, input#submitTitle {
     font-family: "fanwooditalic";
     color: #fff;
     background-color: #a8c946;
+}
+
+input#submitReview {
+    width: 200px;
+
+}
+
+#map-hover-feedback {
+    display: none;
+    width: 400px;
+    height: 200px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 8;
+    background: #fff;
+    border-radius: 5px;
+    left: 50%;
+    margin-left: -220px;
+    top: 50%;
+    margin-top: -120px;
+    padding: 20px;
+}
+
+#map-hover-feedback h3 {
+    margin-top: 0;
+}
+
+input#yourName,
+textarea#review {
+    width: 100%;
+}
+input#yourName {
+    height: 20px;
+    padding: 4px;
+}
+textarea#review {
+    margin-top: 10px;
+    height: 60px;
+    padding: 4px;
 }
 
 /* div.bookStep:first-child {
@@ -203,4 +243,33 @@ input#submitCode, input#submitTitle {
 }
 #haveBookId {
     color: darkgrey;
+}
+#map-hover .sideContent {
+    overflow: scroll;
+}
+
+.journeyElement {
+    clear: both;
+    margin-bottom: 30px;
+}
+.journeyElement .title {
+    font-size: 1.3em;
+    color: #000; 
+}
+.journeyElement .location {
+    color: darkgrey;
+}
+.journeyElement .description {
+    
+}
+
+.bookStep {
+    min-height: 130px;
+    cursor: pointer;
+}
+.bookStep > .journey {
+    display: none;
+}
+.bookStep.expanded > .journey {
+    display: inline;
 }

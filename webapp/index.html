@@ -19,13 +19,12 @@
 <body>
     <div id="map-hover-feedback">
         <h3>Book review</h3>
-        <p>Review your last book</p>
-
         <form action="" id="newReviewForm">
-            <input type="hidden" name="currentCode" id="bookCode" placeholder="Your Book ID" />
+            <input type="hidden" name="currentCode" id="bookCode" />
+            <input type="hidden" name="locationRef" id="bookLocationRef" />
             <input type="text" name="yourName" id="yourName" placeholder="Your Name" />
-            <textarea name="feedback" id="feedback" placeholder="Feedback"></textarea>
-            <input type="submit" value="Submit your Feedback" />
+            <textarea name="review" id="review" placeholder="Review"></textarea>
+            <input type="submit" value="Submit your Feedback" id="submitReview" />
         </form>
 
     </div>
@@ -61,14 +60,14 @@
                 </li>
                 <li><a href="#" id="explore">Explore</a>
                 </li>
-                <li><a href="#" id="wishlist">Wishlist</a>
-                </li>
+                <!-- <li><a href="#" id="wishlist">Wishlist</a>
+                </li> -->
             </ul>
         </div>
         <div class="sideContent">
             <div class="newBookForm">
                 <span>+ New book</span><br>
-                <input type="text" name="bookCode" id="bookCode" placeholder="Enter the book ID" /> <input type="button" name="submitCode" id="submitCode" value="Pick up" />
+                <input type="text" name="bookCodeFind" id="bookCodeFind" placeholder="Enter the book ID" /> <input type="button" name="submitCode" id="submitCode" value="Pick up" />
                 <br><span>or</span><br>
                 <input type="text" name="bookTitle" id="bookTitle" placeholder="Enter your book's title" /> 
                 <input type="hidden" name="bookISBN" id="bookISBN" />
