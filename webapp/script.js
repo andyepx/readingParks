@@ -52,9 +52,7 @@ $(document).ready(function() {
 
 		map.setCenter(ll);
 		map.setZoom(17);
-
-
-
+		
 		$.getJSON("/parks/index.php?useAPI=true&ITEM_TYPE=SHELTER&limit=5000", function(data) {
 
 			data = data.data;
@@ -78,6 +76,55 @@ $(document).ready(function() {
 
 					$("#map-hover-grey").show();
 					$("#map-hover-popup-create").toggle();
+
+					$("#new-title").autocomplete({
+						source: function(request, response) {
+							$.ajax({
+								url: "http://openlibrary.org/search.json?title=" + request.term,
+								dataType: "JSON",
+								success: function(data) {
+
+									//console.log(data.docs.length);
+
+									var d = [];
+									for (var i = 0; i < data.docs.length; i++) {
+										var vID;
+										console.log(data.docs[i]);
+										if (data.docs[i].isbn) {
+											vID = data.docs[i].isbn[0];
+										} else {
+											vID = i
+										}
+										d[i] = {
+											//id: data.docs[i].isbn[data.docs[i].isbn.length-1],
+											id: vID,
+											value: data.docs[i].title + ";;" + data.docs[i].author_name,
+											label: data.docs[i].title
+										}
+
+									}
+
+									//console.log(d);	
+
+									response(d);
+								}
+							});
+						},
+						minLength: 5,
+						select: function(event, ui) {
+							var splits = this.value.split(";;");
+							console.log(this.value);
+							$("#new-title").val(splits[0]);
+							$("#new-author").val(splits[1]);
+							$("#isbn").val(this.id);
+						},
+						open: function() {
+							$(this).removeClass("ui-corner-all").addClass("ui-corner-top");
+						},
+						close: function() {
+							$(this).removeClass("ui-corner-top").addClass("ui-corner-all");
+						}
+					});
 
 				});
 				marker.setMap(map);
@@ -117,14 +164,107 @@ $(document).ready(function() {
 	});
 
 	$("#myBooks").click(function() {
-		$(".sideContent .topMenu").show();
-		$(".sideContent .topMenu ul li:first").addClass("active");
-		$(".sideContent .content").html("load content...");
+		$(".sideContent .newBookForm").show();
+		// $(".sideContent .topMenu ul li:first").addClass("active");
+		// $(".sideContent .content").html("load content...");
+
+		$("#bookTitle").autocomplete({
+			source: function(request, response) {
+				$.ajax({
+					url: "http://openlibrary.org/search.json?title=" + request.term,
+					dataType: "JSON",
+					success: function(data) {
+
+						//console.log(data.docs.length);
+
+						var d = [];
+						for (var i = 0; i < data.docs.length; i++) {
+							var vID;
+							//console.log(data.docs[i]);
+							if (data.docs[i].isbn) {
+								vID = data.docs[i].isbn[0];
+							} else {
+								vID = i
+							}
+							d[i] = {
+								//id: data.docs[i].isbn[data.docs[i].isbn.length-1],
+								id: vID,
+								value: data.docs[i].title,
+								label: data.docs[i].title
+							}
+
+						}
+
+						response(d);
+					}
+				});
+			},
+			minLength: 5,
+			select: function(event, ui) {
+				//console.log(event.target);
+				//var s = event.target.value.split(";");
+				//console.log(s);
+				//$("#bookTitle").val(s[0]);
+				//$("#bookISBN").val(s[1]);
+			},
+			open: function() {
+				$(this).removeClass("ui-corner-all").addClass("ui-corner-top");
+			},
+			close: function() {
+				$(this).removeClass("ui-corner-top").addClass("ui-corner-all");
+			}
+		});
+
+	});
+
+	$("#submitTitle").click(function() {
+
+		$.ajax({
+			type: "POST",
+			url: "/parks/addNewBook.php",
+			data: {
+				title: $("#bookTitle").val(),
+				isbn: $("#bookISBN").val()
+			},
+			success: function(d) {
+				console.log(d);
+				if (!d.error) {
+					$("#bookID").html(d.bookCode);
+					$(".bookUpDetails").html(d.bookTitle);
+					$(".finishedButton").html("Done reading.");
+				}
+			},
+			dataType: "JSON"
+		});
+
+	});
+
+	$(".finishedButton").click(function(){
+		event.preventDefault();
+		
+		$.ajax({
+			type: "POST",
+			url: "/parks/addNewBook.php",
+			data: {
+				bookID: $("#bookID").html(),
+				isbn: $("#bookISBN").val()
+			},
+			success: function(d) {
+				console.log(d);
+				if (!d.error) {
+					$("#bookID").html(d.bookCode);
+					$(".bookUpDetails").html(d.bookTitle);
+					$(".finishedButton").html("Done reading.");
+				}
+			},
+			dataType: "JSON"
+		});
+
 	});
 
 	$("#nearMe").click(function() {
 		loadNearMe();
-		$(".sideContent .topMenu").hide();
+		$(".sideContent .newBookForm").hide();
 		$(".sideContent .content").html("load content...");
 	});
 

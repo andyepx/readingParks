@@ -111,7 +111,8 @@ ul li a:hover {
     color: #575756;
 }
 
-.sideContent .topMenu {
+.sideContent .topMenu,
+.sideContent .newBookForm {
     display: none;
 }
 .sideContent .content {
