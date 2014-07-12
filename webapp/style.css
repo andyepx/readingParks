@@ -56,6 +56,17 @@ p.haveBookId {
     display: none;
 }
 
+.imgBookUp img {
+    width: 80px;
+}
+.imgBookUp {
+    float: left;
+    margin-right: 10px;
+}
+.bookStep {
+    clear: both;
+}
+
 #topBar {
     width: 100%;
     height: 50px;

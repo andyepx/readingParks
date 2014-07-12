@@ -41,13 +41,17 @@
 
               $lastCode = substr(md5(substr(md5(time()), 5, 10)), 3, 9);
 
-              $mysql_query_string = "INSERT INTO Books (Title, Author, bookCode, isbn) VALUES ('".addslashes($_POST['title'])."', '".addslashes($_POST['author'])."', '".$lastCode."', '".$_POST['isbn']."')";
+              $mysql_query_string = "INSERT INTO Books (Title, Author, bookCode, isbn, coverImage) VALUES ('".addslashes($_POST['title'])."', '".addslashes($_POST['bookAuthor'])."', '".$lastCode."', '".$_POST['bookISBN']."', '".addslashes($_POST['bookCover'])."')";
               
               //print_r($mysql_query_string);
 
               $get_array = Database::execute_sql_add($mysql_query_string);
+
               $json_obj->bookCode = $lastCode;
               $json_obj->bookTitle = $_POST['title'];
+              $json_obj->Author = $_POST['bookAuthor'];
+              $json_obj->isbn = $_POST['bookISBN'];
+              $json_obj->bookCover = $_POST['bookCover'];
             
             }
 

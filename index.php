@@ -37,8 +37,10 @@
         } else if (isset($_GET['fromTable']) && $_GET['fromTable']=="BookLocation") {
 
         	// Fix this query to only get the last update
-
-        	$mysql_query_string = "SELECT * FROM ".$_GET['fromTable']." WHERE (LATITUDE < ".$_GET['minLat']." AND LATITUDE > ".$_GET['maxLat'].") AND (LONGITUDE > ".$_GET['minLong']." AND LONGITUDE < ".$_GET['maxLong'].") GROUP BY bookID LIMIT 1000";
+        	if ($_GET['minLat'] != "")
+        		$mysql_query_string = "SELECT * FROM ".$_GET['fromTable']." INNER JOIN Books ON Books.bookID = BookLocation.BookID WHERE entryID IN (SELECT MAX(entryID) FROM ".$_GET['fromTable']." GROUP BY bookID) AND (LATITUDE < ".$_GET['minLat']." AND LATITUDE > ".$_GET['maxLat'].") AND (LONGITUDE > ".$_GET['minLong']." AND LONGITUDE < ".$_GET['maxLong'].") ORDER BY lastUpdate DESC LIMIT 1000";
+        	else if ($_GET['bookID'] != "")
+        		$mysql_query_string = "SELECT * FROM ".$_GET['fromTable']." as A INNER JOIN ParkData ON A.Latitude = ParkData.LATITUDE AND A.Longitude = ParkData.LONGITUDE WHERE A.bookID = ".$_GET['bookID'];
         	//print_r($mysql_query_string);
 	        $get_array = Database::get_all_results($mysql_query_string);
 

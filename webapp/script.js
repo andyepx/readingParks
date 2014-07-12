@@ -28,7 +28,8 @@ $(document).ready(function() {
 			mapOptions);
 
 		google.maps.event.addListener(map, 'idle', function(ev) {
-			loadNearMe();
+			if (!selectShelter)
+				loadNearMe(true);
 		});
 
 	}
@@ -72,6 +73,7 @@ $(document).ready(function() {
 					icon: 'images/shelter_sm.png'
 				});
 				google.maps.event.addListener(marker, "click", function(c) {
+
 
 					$("#new-longitute").val(c.latLng.B);
 					$("#new-latitude").val(c.latLng.k);
@@ -157,7 +159,7 @@ $(document).ready(function() {
 						markers[i].setMap(null);
 					}
 					markers = [];
-					loadNearMe();
+					loadNearMe(true);
 				}
 			},
 			dataType: "JSON"
@@ -166,6 +168,7 @@ $(document).ready(function() {
 	});
 
 	$("#myBooks").click(function() {
+		$(".bookJourney").html("").hide();
 		$(".sideContent .newBookForm").show();
 		// $(".sideContent .topMenu ul li:first").addClass("active");
 		// $(".sideContent .content").html("load content...");
@@ -192,7 +195,9 @@ $(document).ready(function() {
 								//id: data.docs[i].isbn[data.docs[i].isbn.length-1],
 								id: vID,
 								value: data.docs[i].title,
-								label: data.docs[i].title
+								label: data.docs[i].title,
+								author: data.docs[i].author_name ? data.docs[i].author_name[0] : "",
+								coverLink: data.docs[i].cover_i ? 'http://covers.openlibrary.org/b/ID/'+data.docs[i].cover_i+'-L.jpg' : 'http://covers.openlibrary.org/b/ISBN/'+vID+'-L.jpg' 
 							}
 
 						}
@@ -203,11 +208,14 @@ $(document).ready(function() {
 			},
 			minLength: 5,
 			select: function(event, ui) {
+				//console.log(ui.item);
 				//console.log(event.target);
 				//var s = event.target.value.split(";");
 				//console.log(s);
-				//$("#bookTitle").val(s[0]);
-				//$("#bookISBN").val(s[1]);
+				$("#bookTitle").val(ui.item.value);
+				$("#bookISBN").val(ui.item.vID);
+				$("#bookAuthor").val(ui.item.author);
+				$("#bookCover").val(ui.item.coverLink);
 			},
 			open: function() {
 				$(this).removeClass("ui-corner-all").addClass("ui-corner-top");
@@ -225,8 +233,9 @@ $(document).ready(function() {
 
 			$("#bookCode").val("");
 			$(".haveBookId").show();
-			$("#bookID").html(d.data[0].bookCode);
-			$(".bookUpDetails").html(d.data[0].Title);
+			$(".imgBookUp").html("<img src='"+d.bookCover+"' />");
+			$("#bookID").html(d.bookCode);
+			$(".bookUpDetails").html(d.Title);
 			$(".finishedButton").html("Done reading.");
 
 		});
@@ -240,14 +249,17 @@ $(document).ready(function() {
 			url: "/parks/addNewBook.php",
 			data: {
 				title: $("#bookTitle").val(),
-				isbn: $("#bookISBN").val()
+				bookISBN: $("#bookISBN").val(),
+				bookAuthor: $("#bookAuthor").val(),
+				bookCover: $("#bookCover").val()
 			},
 			success: function(d) {
 				console.log(d);
 				if (!d.error) {
 					$(".haveBookId").show();
+					$(".imgBookUp").html("<img src='"+d.bookCover+"' />");
 					$("#bookID").html(d.bookCode);
-					$(".bookUpDetails").html(d.bookTitle);
+					$(".bookUpDetails").html(d.bookTitle+"<br>by "+d.Author);
 					$(".finishedButton").html("Done reading.");
 				}
 			},
@@ -284,6 +296,7 @@ $(document).ready(function() {
 				google.maps.event.addListener(marker, "click", function(c) {
 
 					if (selectShelter) {
+						console.log(c.latLng);
 						// $("#new-longitute").val(c.latLng.B);
 						// $("#new-latitude").val(c.latLng.k);
 						// $("#bookID").html(d.bookCode);
@@ -303,6 +316,7 @@ $(document).ready(function() {
 									$("#map-hover").toggleClass("opened");
 									$("#topBar").toggleClass("opened");
 									$("#bookTitle").val("");
+									$(".imgBookUp").html("");
 									$(".bookUpDetails").html("");
 									$(".finishedButton").html("");
 
@@ -323,13 +337,14 @@ $(document).ready(function() {
 	});
 
 	$("#nearMe").click(function() {
-		loadNearMe();
 		$(".newBookForm").hide();
+		$(".bookJourney").html("").show();
+		loadNearMe(true);;
 		//$(".sideContent .newBookForm").hide();
 		//$(".sideContent .content").html("load content...");
 	});
 
-	function loadNearMe() {
+	function loadNearMe(fillDiv) {
 
 		// http://stackoverflow.com/questions/6910847/get-boundaries-longitude-and-latitude-from-current-zoom-google-maps
 		var bounds = map.getBounds();
@@ -343,6 +358,8 @@ $(document).ready(function() {
 		}
 		markers = [];
 
+		if (fillDiv) $(".bookJourney").html("");
+
 		$.getJSON("/parks/index.php?fromTable=BookLocation&minLat=" + nw.lat() + "&maxLat=" + se.lat() + "&minLong=" + nw.lng() + "&maxLong=" + se.lng(), function(data) {
 
 			data = data.data;
@@ -354,12 +371,51 @@ $(document).ready(function() {
 					title: data[i].bookID,
 					icon: 'images/book_sm.png'
 				});
+
 				marker.setMap(map);
 				markers.push(marker);
+
+				google.maps.event.addListener(marker, "click", function(c) {
+
+					for (var i=0; i<markers.length; i++) {
+					
+						markers[i].setIcon('images/book_sm.png');
+						if (markers[i].position.B == c.latLng.B && markers[i].position.k == c.latLng.k) {
+							if (markers[i].icon == 'images/book_open_sm.png')
+								markers[i].setIcon('images/book_sm.png');
+							else
+								markers[i].setIcon('images/book_open_sm.png');
+
+							loadBookJourney(markers[i].title);
+						}
+					
+					}
+					
+				});	
+
+
+				if (fillDiv) {
+
+					$(".bookJourney").append("<div class='bookStep'><div class='imgBookUp'><img src='"+data[i].coverImage+"' /></div> <div class='bookUpDetails'>"+data[i].Title+"<br>by "+data[i].Author+"</div> </div>");
+
+				}
 			}
 
 		});
 
+
+	}
+
+	function loadBookJourney(bookID) {
+
+		$.getJSON("/parks/index.php?fromTable=BookLocation&bookID=" + bookID, function(data) {
+			$(".bookJourney").html("");
+			data = data.data;
+			for (var i = 0; i < data.length; i++) {
+				$(".bookJourney").append("<div class='bookStep'><p>Date: "+data[i].lastUpdate+"</p><p>Where: "+data[i].NODES_NAME+" at "+data[i].PARK_NAME+"</p></div>");
+			}
+
+		});
 
 	}
 
