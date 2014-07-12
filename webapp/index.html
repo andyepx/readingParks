@@ -18,7 +18,11 @@
 <body>
     <div id="map-hover-popup-create">
         <h3>Drop a new book</h3>
+
+        <p>Select the Shelter where you've just left your book and type in the details of your book or use the code on your book to update its location!</p>
         <form action="" id="newBookForm">
+            <input type="text" name="currentCode" id="book-code" />
+
             <input type="text" name="title" id="new-title" />
             <input type="text" name="author" id="new-author" />
             <input type="hidden" name="longitude" id="new-longitute" />
@@ -28,8 +32,6 @@
     </div>
     <div id="map-hover-grey"></div>
     <div id="map-hover-popup">
-        <h3>Drop a new book</h3>
-        <p>Select the Shelter where you've just left your book and type in the details of your book!</p>
     </div>
     <div id="map-hover">
         <div class="top">
@@ -38,23 +40,24 @@
         </div>
         <div class="menu">
             <ul>
-                <li><a href="#">Near me</a>
+                <li><a href="#" id="nearMe">Near me</a>
                 </li>
-                <li><a href="#">My books</a>
+                <li><a href="#" id="myBooks">My books</a>
                 </li>
-                <li><a href="#">Explore</a>
+                <li><a href="#" id="explore">Explore</a>
                 </li>
-                <li><a href="#">Wishlist</a>
+                <li><a href="#" id="wishlist">Wishlist</a>
                 </li>
             </ul>
         </div>
         <div class="sideContent">
             <div class="topMenu">
                 <ul>
-                    <li><a href="#">My readings</a></li>
+                    <li><a href="#" id="myReadings">My readings</a></li>
                     <li><a href="#" id="bookDrop">Drop new book</a></li>
                 </ul>
             </div>
+            <div class="content"></div>
         </div>
 
     </div>

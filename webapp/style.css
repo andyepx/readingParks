@@ -12,11 +12,11 @@ body {
 }
 
 #map-hover {
-    width: 65%;
+    width: 55%;
     height: 100%;
     position: fixed;
     top: 0;
-    left: -60%;
+    left: -52%;
     background: #F5F5F5;
     z-index: 10;
     -webkit-transition: left .5s linear;
@@ -71,7 +71,7 @@ body {
     width: 65px;
     height: 65px;
     cursor: pointer;
-    margin-left: 93%;
+    margin-left: 93.5%;
 }
 #map-hover .menu { 
     float: left;
@@ -101,7 +101,6 @@ body {
     width: 160px;
     height: 45px;
     font-size: 20pt;
-
 }
 
 ul li a {
@@ -110,4 +109,11 @@ ul li a {
 }
 ul li a:hover {
     color: #575756;
+}
+
+.sideContent .topMenu {
+    display: none;
+}
+.sideContent .content {
+    clear: both;
 }
