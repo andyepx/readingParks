@@ -9,7 +9,8 @@
         // Do any neccissary validation here. You can use something like https://github.com/ASoares/PHP-Form-Validation
         // if you are not going to validate input, which you absolutely should if users are submitting it, then at least
         // make sure the correct values are present
-        if ((isset($_POST['title']) && !empty($_POST['title'])) || (isset($_POST['currentCode']) && !empty($_POST['currentCode']))) {
+        if ((isset($_POST['title']) && !empty($_POST['title'])) || 
+          (isset($_POST['bookCode']) && !empty($_POST['bookCode']))) {
 
             // Open the database connection. This is what happens inside of the API class constructor
             // but if this page is simply for submitting data to the database you can just call this method
@@ -21,12 +22,19 @@
 
             $json_obj = new StdClass();
 
-            if (isset($_POST['currentCode']) && !empty($_POST['currentCode'])) {
+            if (isset($_POST['bookCode']) && !empty($_POST['bookCode'])) {
 
-              $mysql_query_string = "SELECT bookID FROM Books WHERE bookCode LIKE '%".$_POST['currentCode']."%'";
+              $mysql_query_string = "SELECT bookID FROM Books WHERE bookCode LIKE '%".$_POST['bookCode']."%'";
               $get_array = Database::get_all_results($mysql_query_string);
               //print_r($get_array);
               $json_obj->lastBookId = $get_array[0]['bookID'];
+
+              if ($json_obj->lastBookId != -1) {
+                  $mysql_query_string = "INSERT INTO BookLocation (bookID, Latitude, Longitude) VALUES (".$json_obj->lastBookId.", ".$_POST['latitude'].", ".$_POST['longitude'].")";
+                  //print_r($mysql_query_string);
+                  $get_array = Database::execute_sql_add($mysql_query_string);
+                  $json_obj->newLocation = $get_array;
+              }
             
             } else {
             
@@ -42,12 +50,6 @@
               $json_obj->bookTitle = $_POST['title'];
             
             }
-
-            // if ($json_obj->lastBookId != -1) {
-            //     $mysql_query_string = "INSERT INTO BookLocation (bookID, Latitude, Longitude) VALUES (".$json_obj->lastBookId.", ".$_POST['latitude'].", ".$_POST['longitude'].")";
-            //     //print_r($mysql_query_string);
-            //     $get_array = Database::execute_sql_add($mysql_query_string);
-            // }
 
             //$json_obj->lastLocationId = $get_array;
             

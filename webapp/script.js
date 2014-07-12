@@ -1,6 +1,8 @@
 $(document).ready(function() {
 
 	var map, ll, markers = [];
+	var selectShelter = false;
+
 
 	if (navigator.geolocation) {
 		navigator.geolocation.getCurrentPosition(gotCoords);
@@ -52,7 +54,7 @@ $(document).ready(function() {
 
 		map.setCenter(ll);
 		map.setZoom(17);
-		
+
 		$.getJSON("/parks/index.php?useAPI=true&ITEM_TYPE=SHELTER&limit=5000", function(data) {
 
 			data = data.data;
@@ -217,6 +219,20 @@ $(document).ready(function() {
 
 	});
 
+	$("#submitCode").click(function() {
+
+		$.getJSON("/parks/index.php?fromTable=Books&bookCode=" + $("#bookCode").val(), function(d) {
+
+			$("#bookCode").val("");
+			$(".haveBookId").show();
+			$("#bookID").html(d.data[0].bookCode);
+			$(".bookUpDetails").html(d.data[0].Title);
+			$(".finishedButton").html("Done reading.");
+
+		});
+
+	});
+
 	$("#submitTitle").click(function() {
 
 		$.ajax({
@@ -229,6 +245,7 @@ $(document).ready(function() {
 			success: function(d) {
 				console.log(d);
 				if (!d.error) {
+					$(".haveBookId").show();
 					$("#bookID").html(d.bookCode);
 					$(".bookUpDetails").html(d.bookTitle);
 					$(".finishedButton").html("Done reading.");
@@ -239,33 +256,77 @@ $(document).ready(function() {
 
 	});
 
-	$(".finishedButton").click(function(){
+	$(".finishedButton").click(function() {
 		event.preventDefault();
-		
-		$.ajax({
-			type: "POST",
-			url: "/parks/addNewBook.php",
-			data: {
-				bookID: $("#bookID").html(),
-				isbn: $("#bookISBN").val()
-			},
-			success: function(d) {
-				console.log(d);
-				if (!d.error) {
-					$("#bookID").html(d.bookCode);
-					$(".bookUpDetails").html(d.bookTitle);
-					$(".finishedButton").html("Done reading.");
-				}
-			},
-			dataType: "JSON"
-		});
+		selectShelter = true;
+		$("#map-hover").toggleClass("opened");
+		$("#topBar").html("Select the shelter on the map where you have dropped your book off.").toggleClass("opened");
 
+		map.setCenter(ll);
+		map.setZoom(17);
+
+		$.getJSON("/parks/index.php?useAPI=true&ITEM_TYPE=SHELTER&limit=5000", function(data) {
+
+			data = data.data;
+			for (var i = 0; i < markers.length; i++) {
+				markers[i].setMap(null);
+			}
+			markers = [];
+
+			for (var i = 0; i < data.length; i++) {
+				var myLatlng = new google.maps.LatLng(data[i].LATITUDE, data[i].LONGITUDE);
+				var marker = new google.maps.Marker({
+					position: myLatlng,
+					map: map,
+					title: data[i].ITEM_TYPE,
+					icon: 'images/shelter_sm.png'
+				});
+				google.maps.event.addListener(marker, "click", function(c) {
+
+					if (selectShelter) {
+						// $("#new-longitute").val(c.latLng.B);
+						// $("#new-latitude").val(c.latLng.k);
+						// $("#bookID").html(d.bookCode);
+
+						$.ajax({
+							type: "POST",
+							url: "/parks/addNewBook.php",
+							data: {
+								bookCode: $("#bookID").html(),
+								latitude: c.latLng.k,
+								longitude: c.latLng.B
+							},
+							success: function(d) {
+								console.log(d);
+								if (!d.error) {
+									selectShelter = false;
+									$("#map-hover").toggleClass("opened");
+									$("#topBar").toggleClass("opened");
+									$("#bookTitle").val("");
+									$(".bookUpDetails").html("");
+									$(".finishedButton").html("");
+
+									loadNearMe();
+								}
+							},
+							dataType: "JSON"
+						});
+
+					}
+
+				});
+				marker.setMap(map);
+				markers.push(marker);
+			}
+
+		});
 	});
 
 	$("#nearMe").click(function() {
 		loadNearMe();
-		$(".sideContent .newBookForm").hide();
-		$(".sideContent .content").html("load content...");
+		$(".newBookForm").hide();
+		//$(".sideContent .newBookForm").hide();
+		//$(".sideContent .content").html("load content...");
 	});
 
 	function loadNearMe() {
@@ -296,9 +357,6 @@ $(document).ready(function() {
 				marker.setMap(map);
 				markers.push(marker);
 			}
-
-			//var myLatlng = new google.maps.LatLng(data[0].LATITUDE, data[0].LONGITUDE);
-			//map.setCenter(myLatlng);
 
 		});
 

@@ -32,10 +32,11 @@
             <input type="submit" />
         </form>
     </div>
+    <div id="topBar"></div>
     <div id="map-hover-grey"></div>
     <div id="map-hover-popup">
     </div>
-    <div id="map-hover">
+    <div id="map-hover" class="opened">
         <div class="top">
             <div class="logo"></div>
             <div class="drag"></div>
@@ -58,7 +59,7 @@
                 <input type="text" name="bookCode" id="bookCode" placeholder="Enter the book ID" /> <input type="button" name="submitCode" id="submitCode" value="Pick up" />
                 or
                 <input type="text" name="bookTitle" id="bookTitle" placeholder="Enter your book's title" /> <input type="hidden" name="bookISBN" id="bookISBN" /> <input type="button" name="submitTitle" id="submitTitle" value="Share" />
-                <p>Please write the book ID <span id="bookID"></span>, and our url readingparks.com on the first page of the book, so others can be part of the journey of your book.</p>
+                <p class="haveBookId">Please write the book ID <span id="bookID"></span>, and our url readingparks.com on the first page of the book, so others can be part of the journey of your book.</p>
                 <div class="bookUp">
                     <div class="imgBookUp"></div>
                     <div class="bookUpDetails"></div>

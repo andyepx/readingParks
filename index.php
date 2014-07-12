@@ -34,11 +34,23 @@
         	$get_array = Database::clean($_GET);
         	echo $api->get_json_from_assoc($get_array);
 
-        } else if (isset($_GET['fromTable'])) {
+        } else if (isset($_GET['fromTable']) && $_GET['fromTable']=="BookLocation") {
 
         	// Fix this query to only get the last update
 
         	$mysql_query_string = "SELECT * FROM ".$_GET['fromTable']." WHERE (LATITUDE < ".$_GET['minLat']." AND LATITUDE > ".$_GET['maxLat'].") AND (LONGITUDE > ".$_GET['minLong']." AND LONGITUDE < ".$_GET['maxLong'].") GROUP BY bookID LIMIT 1000";
+        	//print_r($mysql_query_string);
+	        $get_array = Database::get_all_results($mysql_query_string);
+
+	        $json_obj = new StdClass();
+	        $json_obj->data = $get_array;
+	        echo json_encode($json_obj, JSON_PRETTY_PRINT);
+
+        } else if (isset($_GET['fromTable']) && $_GET['fromTable']=="Books") {
+
+        	// Fix this query to only get the last update
+
+        	$mysql_query_string = "SELECT * FROM ".$_GET['fromTable']." WHERE bookCode = '".$_GET['bookCode']."'";
         	//print_r($mysql_query_string);
 	        $get_array = Database::get_all_results($mysql_query_string);
 
