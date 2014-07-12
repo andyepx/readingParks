@@ -10,21 +10,18 @@ body {
 #map-canvas {
     height: 100%
 }
-
 #map-hover {
-    width: 55%;
+    width: 800px;
     height: 100%;
     position: fixed;
     top: 0;
-    left: -52%;
+    left: -760px;
     background: #F5F5F5;
     z-index: 10;
     -webkit-transition: left .5s linear;
     transition: left .5s linear;
     border-right: 3px solid #95C11E;
 }
-
-
 #map-hover-grey {
     width: 100%;
     height: 100%;
@@ -36,9 +33,7 @@ body {
     -webkit-transition: opacity .5s linear;
     transition: opacity .5s linear;
 }
-
-#map-hover-popup-create,
-#map-hover-popup {
+#map-hover-popup-create, #map-hover-popup {
     width: 40%;
     height: 40%;
     background: #F5F5F5;
@@ -51,22 +46,24 @@ body {
     margin-left: -20%;
     margin-top: -20%;
 }
-
 p.haveBookId {
     display: none;
 }
-
 .imgBookUp img {
     width: 80px;
 }
 .imgBookUp {
-    float: left;
+/*    display: none;
+*/    float: left;
     margin-right: 10px;
+    width: 85px;
+    min-height: 120px;
+    margin-bottom: 10px;
+    background: lightgrey;
 }
 .bookStep {
     clear: both;
 }
-
 #topBar {
     width: 100%;
     height: 50px;
@@ -82,11 +79,9 @@ p.haveBookId {
 #topBar.opened {
     top: 0;
 }
-
 #map-hover.opened {
     left: 0;
 }
-
 #map-hover .top {
     margin-top: 10px;
 }
@@ -102,9 +97,9 @@ p.haveBookId {
     width: 65px;
     height: 65px;
     cursor: pointer;
-    margin-left: 93.5%;
+    margin-left: 730px;
 }
-#map-hover .menu { 
+#map-hover .menu {
     float: left;
 }
 #map-hover .menu ul {
@@ -116,14 +111,13 @@ p.haveBookId {
     display: block;
     width: 160px;
     height: 45px;
-    font-size: 20pt;
+    font-size: 14pt;
 }
-
 #map-hover .sideContent {
-    width: 80%;
+    width: 550px;
+    float: left;
     height: 100%;
 }
-
 #map-hover .sideContent .topMenu ul {
     list-style: none;
 }
@@ -131,9 +125,8 @@ p.haveBookId {
     float: left;
     width: 160px;
     height: 45px;
-    font-size: 20pt;
+    font-size: 14pt;
 }
-
 ul li a {
     color: #B2B2B1;
     text-decoration: none;
@@ -141,11 +134,73 @@ ul li a {
 ul li a:hover {
     color: #575756;
 }
-
-.sideContent .topMenu,
-.sideContent .newBookForm {
+.sideContent .topMenu, .sideContent .newBookForm {
     display: none;
 }
 .sideContent .content {
     clear: both;
+}
+#map-hover-feedback {
+    display: none;
+}
+div.sideContent {
+    padding-top: 20px;
+}
+.newBookForm {
+    font-size: 14pt;
+}
+.newBookForm span {
+    color: darkgrey;
+}
+span#bookID {
+    color: #a8c946;
+}
+.newBookFrom p {
+    font-size: 15pt;
+}
+input#bookCode, input#bookTitle {
+    border: 2px solid lightgrey;
+    border-radius: 5px;
+    padding: 5px;
+    width: 400px;
+    font-size: 16pt;
+    font-family: "fanwooditalic";
+}
+input#submitCode, input#submitTitle {
+    border: 1px solid lightgrey;
+    border-radius: 5px;
+    padding: 5px;
+    width: 100px;
+    font-size: 16pt;
+    font-family: "fanwooditalic";
+    color: #fff;
+    background-color: #a8c946;
+}
+
+/* div.bookStep:first-child {
+    margin-top: 20px;
+}
+*/
+.bookUpDetails span.title, .newBookFrom span.title {
+    font-size: 1.8em;
+    color: #000;
+}
+.bookUpDetails span.author, .newBookFrom span.author {
+    color: darkgrey;
+}
+.finishedButton {
+    display: none;
+    border: 1px solid lightgrey;
+    border-radius: 5px;
+    padding: 5px;
+    width: 115px;
+    margin-left: 91px;
+    font-size: 16pt;
+    font-family: "fanwooditalic";
+    color: #fff;
+    background-color: grey;
+    cursor: pointer;
+}
+#haveBookId {
+    color: darkgrey;
 }

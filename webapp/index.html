@@ -17,6 +17,18 @@
 </head>
 
 <body>
+    <div id="map-hover-feedback">
+        <h3>Book review</h3>
+        <p>Review your last book</p>
+
+        <form action="" id="newReviewForm">
+            <input type="hidden" name="currentCode" id="bookCode" placeholder="Your Book ID" />
+            <input type="text" name="yourName" id="yourName" placeholder="Your Name" />
+            <textarea name="feedback" id="feedback" placeholder="Feedback"></textarea>
+            <input type="submit" value="Submit your Feedback" />
+        </form>
+
+    </div>
     <div id="map-hover-popup-create">
         <h3>Drop a new book</h3>
 
@@ -43,9 +55,9 @@
         </div>
         <div class="menu">
             <ul>
-                <li><a href="#" id="nearMe">Near me</a>
-                </li>
                 <li><a href="#" id="myBooks">My books</a>
+                </li>
+                <li><a href="#" id="nearMe">Near me</a>
                 </li>
                 <li><a href="#" id="explore">Explore</a>
                 </li>
@@ -55,9 +67,9 @@
         </div>
         <div class="sideContent">
             <div class="newBookForm">
-                + New book
+                <span>+ New book</span><br>
                 <input type="text" name="bookCode" id="bookCode" placeholder="Enter the book ID" /> <input type="button" name="submitCode" id="submitCode" value="Pick up" />
-                or
+                <br><span>or</span><br>
                 <input type="text" name="bookTitle" id="bookTitle" placeholder="Enter your book's title" /> 
                 <input type="hidden" name="bookISBN" id="bookISBN" />
                 <input type="hidden" name="bookAuthor" id="bookAuthor" />

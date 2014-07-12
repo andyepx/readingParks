@@ -197,7 +197,7 @@ $(document).ready(function() {
 								value: data.docs[i].title,
 								label: data.docs[i].title,
 								author: data.docs[i].author_name ? data.docs[i].author_name[0] : "",
-								coverLink: data.docs[i].cover_i ? 'http://covers.openlibrary.org/b/ID/'+data.docs[i].cover_i+'-L.jpg' : 'http://covers.openlibrary.org/b/ISBN/'+vID+'-L.jpg' 
+								coverLink: data.docs[i].cover_i ? 'http://covers.openlibrary.org/b/ID/' + data.docs[i].cover_i + '-L.jpg' : 'http://covers.openlibrary.org/b/ISBN/' + vID + '-L.jpg'
 							}
 
 						}
@@ -233,7 +233,8 @@ $(document).ready(function() {
 
 			$("#bookCode").val("");
 			$(".haveBookId").show();
-			$(".imgBookUp").html("<img src='"+d.bookCover+"' />");
+			$(".bookUp").show();
+			$(".imgBookUp").show().html("<img src='" + d.bookCover + "' />");
 			$("#bookID").html(d.bookCode);
 			$(".bookUpDetails").html(d.Title);
 			$(".finishedButton").html("Done reading.");
@@ -257,10 +258,11 @@ $(document).ready(function() {
 				console.log(d);
 				if (!d.error) {
 					$(".haveBookId").show();
-					$(".imgBookUp").html("<img src='"+d.bookCover+"' />");
+					$(".bookUp").show();
+					$(".imgBookUp").show().html("<img src='" + d.bookCover + "' />");
 					$("#bookID").html(d.bookCode);
-					$(".bookUpDetails").html(d.bookTitle+"<br>by "+d.Author);
-					$(".finishedButton").html("Done reading.");
+					$(".bookUpDetails").html("<span class='title'>"+d.bookTitle + "</span><br><span class='author'>by " + d.Author+"</span>");
+					$(".finishedButton").show().html("Done reading");
 				}
 			},
 			dataType: "JSON"
@@ -272,7 +274,7 @@ $(document).ready(function() {
 		event.preventDefault();
 		selectShelter = true;
 		$("#map-hover").toggleClass("opened");
-		$("#topBar").html("Select the shelter on the map where you have dropped your book off.").toggleClass("opened");
+		//$("#topBar").html("Select the shelter on the map where you have dropped your book off.").toggleClass("opened");
 
 		map.setCenter(ll);
 		map.setZoom(17);
@@ -301,6 +303,8 @@ $(document).ready(function() {
 						// $("#new-latitude").val(c.latLng.k);
 						// $("#bookID").html(d.bookCode);
 
+						
+
 						$.ajax({
 							type: "POST",
 							url: "/parks/addNewBook.php",
@@ -312,13 +316,17 @@ $(document).ready(function() {
 							success: function(d) {
 								console.log(d);
 								if (!d.error) {
+										
+									$("#bookCode").val($("#bookID").html());
+									$("#map-hover-feedback").toggle();
+
 									selectShelter = false;
-									$("#map-hover").toggleClass("opened");
-									$("#topBar").toggleClass("opened");
+									//$("#map-hover").toggleClass("opened");
+									//$("#topBar").toggleClass("opened");
 									$("#bookTitle").val("");
-									$(".imgBookUp").html("");
+									$(".imgBookUp").hide().html("");
 									$(".bookUpDetails").html("");
-									$(".finishedButton").html("");
+									$(".finishedButton").show().html("");
 
 									loadNearMe();
 								}
@@ -338,6 +346,7 @@ $(document).ready(function() {
 
 	$("#nearMe").click(function() {
 		$(".newBookForm").hide();
+		$(".bookUp").hide();
 		$(".bookJourney").html("").show();
 		loadNearMe(true);;
 		//$(".sideContent .newBookForm").hide();
@@ -358,7 +367,10 @@ $(document).ready(function() {
 		}
 		markers = [];
 
-		if (fillDiv) $(".bookJourney").html("");
+		if (fillDiv) {
+			$(".bookJourney").html("");
+			//$(".imgBookUp").show();
+		}
 
 		$.getJSON("/parks/index.php?fromTable=BookLocation&minLat=" + nw.lat() + "&maxLat=" + se.lat() + "&minLong=" + nw.lng() + "&maxLong=" + se.lng(), function(data) {
 
@@ -377,8 +389,8 @@ $(document).ready(function() {
 
 				google.maps.event.addListener(marker, "click", function(c) {
 
-					for (var i=0; i<markers.length; i++) {
-					
+					for (var i = 0; i < markers.length; i++) {
+
 						markers[i].setIcon('images/book_sm.png');
 						if (markers[i].position.B == c.latLng.B && markers[i].position.k == c.latLng.k) {
 							if (markers[i].icon == 'images/book_open_sm.png')
@@ -388,15 +400,17 @@ $(document).ready(function() {
 
 							loadBookJourney(markers[i].title);
 						}
-					
+
 					}
-					
-				});	
+
+				});
 
 
 				if (fillDiv) {
 
-					$(".bookJourney").append("<div class='bookStep'><div class='imgBookUp'><img src='"+data[i].coverImage+"' /></div> <div class='bookUpDetails'>"+data[i].Title+"<br>by "+data[i].Author+"</div> </div>");
+					console.log(data[i]);
+
+					$(".bookJourney").append("<div class='bookStep'><div class='imgBookUp'><img src='" + data[i].coverImage + "' /></div> <div class='bookUpDetails'><span class='title'>" + data[i].Title + "</span><br><span class='author'>by " + data[i].Author + "</span><br><span class='location'>"+"</span></div> </div>");
 
 				}
 			}
@@ -412,11 +426,39 @@ $(document).ready(function() {
 			$(".bookJourney").html("");
 			data = data.data;
 			for (var i = 0; i < data.length; i++) {
-				$(".bookJourney").append("<div class='bookStep'><p>Date: "+data[i].lastUpdate+"</p><p>Where: "+data[i].NODES_NAME+" at "+data[i].PARK_NAME+"</p></div>");
+				$(".bookJourney").append("<div class='bookStep'><p>Date: " + data[i].lastUpdate + "</p><p>Where: " + data[i].NODES_NAME + " at " + data[i].PARK_NAME + "</p></div>");
 			}
 
 		});
 
 	}
+
+	$("#newReviewForm").submit(function() {
+
+		$.ajax({
+			type: "POST",
+			url: "/parks/addNewBook.php",
+			data: $("#newReviewForm").serialize(),
+			success: function(d) {
+				console.log(d);
+				if (!d.error) {
+					
+					$("#map-hover-feedback").toggle();
+
+					//selectShelter = false;
+					//$("#map-hover").toggleClass("opened");
+					//$("#topBar").toggleClass("opened");
+					// $("#bookTitle").val("");
+					// $(".imgBookUp").html("");
+					// $(".bookUpDetails").html("");
+					// $(".finishedButton").html("");
+
+					// loadNearMe();
+				}
+			},
+			dataType: "JSON"
+		});
+
+	});
 
 });
