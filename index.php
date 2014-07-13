@@ -1,6 +1,6 @@
 <?php
 
-	//include the API Builder mini lib
+	//include the API Builder mini lib from https://github.com/brannondorsey/apibuilder
     require_once("api_builder_includes/class.API.inc.php");
 
     header("Content-Type: application/json; charset=utf-8");
@@ -58,6 +58,22 @@
 
 	        $json_obj = new StdClass();
 	        $json_obj->data = $get_array;
+	        echo json_encode($json_obj, JSON_PRETTY_PRINT);
+
+        } else if (isset($_GET['mostPopular']) && $_GET['mostPopular']=="true") {
+
+        	$mysql_query_string = "SELECT Books.*, COUNT(BookReview.bookCode) as A FROM BookReview INNER JOIN Books ON Books.bookCode = BookReview.bookCode GROUP BY BookReview.bookCode ORDER BY A DESC ";
+	        $get_array = Database::get_all_results($mysql_query_string);
+
+	        $json_obj = new StdClass();
+	        $json_obj->books = $get_array;
+
+	        //$mysql_query_string = "SELECT ParkData.*, COUNT(BookLocation.Latitude) as A FROM BookLocation INNER JOIN Books ON ParkData.Latitude = BookLocation.Latitude AND ParkData.Longitude = BookLocation.Longitude  GROUP BY BookLocation.Latitude,BookLocation.Longitude ORDER BY A DESC ";
+	        $mysql_query_string = "SELECT * FROM ParkData WHERE (Latitude, Longitude) IN (SELECT Latitude, Longitude FROM bestparks) GROUP BY PARK_NAME";
+	        $get_array = Database::get_all_results($mysql_query_string);
+	        $json_obj->parks = $get_array;
+
+
 	        echo json_encode($json_obj, JSON_PRETTY_PRINT);
 
         } else {

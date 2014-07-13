@@ -387,6 +387,7 @@ class API {
 		$column_parameters = array();
 		$this->search = "";
 		$order_by = "";
+		$group_by = "";
 		$flow = "";
 		$limit = "";
 		$page = 1;
@@ -402,6 +403,7 @@ class API {
 			}
 			else if($parameter == 'search' && $this->search_allowed) $this->search = $value;
 			else if($parameter =='order_by') $order_by = $value;
+			else if($parameter =='group_by') $group_by = $value;
 			else if($parameter == 'flow') $flow = $value;
 			else if($parameter == 'limit') $limit = $value;
 			else if($parameter == 'page') $page = (int) $value;
@@ -480,6 +482,18 @@ class API {
 			else $flow_string = $this->default_flow . " ";
 			$query .= $flow_string;
 		}
+
+
+
+			//add ORDER BY statement
+			$group_by_string;
+			if($group_by != "" &&
+			$this->is_column_parameter($group_by, $this->columns_to_provide_array)){
+				$group_by_string = "GROUP BY $group_by ";
+			}
+			//else $group_by_string = "ORDER BY " . $this->default_order_by . " ";
+			$query .= $group_by_string;
+
 		//only add LIMIT of it is not a COUNT query
 		if(!$count_only){
 			//add LIMIT statement

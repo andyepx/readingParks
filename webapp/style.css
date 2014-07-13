@@ -101,6 +101,7 @@ p.haveBookId {
 }
 #map-hover .menu {
     float: left;
+    width: 170px;
 }
 #map-hover .menu ul {
     list-style: none;
@@ -130,6 +131,9 @@ p.haveBookId {
 ul li a {
     color: #B2B2B1;
     text-decoration: none;
+}
+ul li a.active{
+    color: #575756;
 }
 ul li a:hover {
     color: #575756;
@@ -264,12 +268,32 @@ textarea#review {
 }
 
 .bookStep {
-    min-height: 130px;
+    min-height: 135px;
     cursor: pointer;
+    background-repeat: no-repeat;
+    background-image: url("images/expand.png");
+    background-position: 530px 100px;
+    border-bottom: 1px solid lightgrey;
+    margin-top: 5px;
+}
+.journeyElement {
+    padding-left: 95px;
 }
 .bookStep > .journey {
     display: none;
 }
+.bookStep.expanded {
+    background-image: url("images/collapse.png");
+}
 .bookStep.expanded > .journey {
     display: inline;
+    
+}
+div.bookStep.park {
+    background-image: none;
+    min-height: 100px;
+}
+
+h3 {
+    margin-top: 0;
 }

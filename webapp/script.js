@@ -18,6 +18,8 @@ $(document).ready(function() {
 			lon: p.coords.longitude
 		};
 		ll = new google.maps.LatLng(p.coords.latitude, p.coords.longitude);
+
+		map.setCenter(ll);
 	}
 
 	function initialize() {
@@ -173,7 +175,10 @@ $(document).ready(function() {
 	});
 
 	$("#myBooks").click(function() {
+		$("ul li a").removeClass("active");
+		$("#myBooks").addClass("active");
 		$(".bookJourney").html("").hide();
+		$(".imgBookUp").hide();
 		$(".sideContent .newBookForm").show();
 		// $(".sideContent .topMenu ul li:first").addClass("active");
 		// $(".sideContent .content").html("load content...");
@@ -357,6 +362,8 @@ $(document).ready(function() {
 	});
 
 	$("#nearMe").click(function() {
+		$("ul li a").removeClass("active");
+		$("#nearMe").addClass("active");
 		$(".newBookForm").hide();
 		$(".bookUp").hide();
 		$(".bookJourney").html("").show();
@@ -415,14 +422,20 @@ $(document).ready(function() {
 
 						for (var i = 0; i < markers.length; i++) {
 
-							markers[i].setIcon('images/book_sm.png');
-							if (markers[i].position.B == c.latLng.B && markers[i].position.k == c.latLng.k) {
-								if (markers[i].icon == 'images/book_open_sm.png')
-									markers[i].setIcon('images/book_sm.png');
-								else
-									markers[i].setIcon('images/book_open_sm.png');
 
-								loadBookJourney(markers[i].title);
+							if (markers[i].position.B == c.latLng.B && markers[i].position.k == c.latLng.k) {
+								console.log(markers[i].icon);
+								if (markers[i].icon == 'images/book_open_sm.png') {
+									markers[i].setIcon('images/book_sm.png');
+									unLoadBookJourney(markers[i].title);
+								} else {
+									loadBookJourney(markers[i].title);
+									markers[i].setIcon('images/book_open_sm.png');
+								}
+
+
+							} else {
+								markers[i].setIcon('images/book_sm.png');
 							}
 
 						}
@@ -446,7 +459,7 @@ $(document).ready(function() {
 							dist = "";
 						}
 
-						$(".bookJourney").append("<div class='bookStep' id='book-" + data[i].bookID + "'><div class='imgBookUp'><img src='" + data[i].coverImage + "' /></div> <div class='bookUpDetails'><span class='title'>" + data[i].Title + "</span><br><span class='author'>by " + data[i].Author + "</span><br>"+dist+"</div><div class='journey'></div></div>");
+						$(".bookJourney").append("<div class='bookStep' id='book-" + data[i].bookID + "'><div class='imgBookUp'><img src='" + data[i].coverImage + "' /></div> <div class='bookUpDetails'><span class='title'>" + data[i].Title + "</span><br><span class='author'>by " + data[i].Author + "</span><br>" + dist + "</div><div class='journey'></div></div>");
 						var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'];
 						for (var j = 0; j < data.length; j++) {
 							if (data[j].bookID == data[i].bookID) {
@@ -467,19 +480,16 @@ $(document).ready(function() {
 
 	}
 
+	function unLoadBookJourney(bookID) {
+
+		$(".bookStep").removeClass("expanded");
+
+	}
+
 	function loadBookJourney(bookID) {
 
 		$(".bookStep").removeClass("expanded");
 		$("#book-" + bookID).addClass("expanded");
-
-		// $.getJSON("/parks/index.php?fromTable=BookLocation&bookID=" + bookID, function(data) {
-		// 	$(".bookJourney").html("");
-		// 	data = data.data;
-		// 	for (var i = 0; i < data.length; i++) {
-		// 		$(".bookJourney").append("<div class='bookStep' id='book-"+data[i].bookID+"'><p>Date: " + data[i].lastUpdate + "</p><p>Where: " + data[i].NODES_NAME + " at " + data[i].PARK_NAME + "</p></div>");
-		// 	}
-
-		// });
 
 	}
 
@@ -515,6 +525,87 @@ $(document).ready(function() {
 
 		$(".bookStep").not(this).removeClass("expanded");
 		$(this).toggleClass("expanded");
+
+	});
+
+	$("#about").click(function(){
+
+		$("ul li a").removeClass("active");
+		$("#about").addClass("active");
+		$(".newBookForm").hide();
+		$(".bookUp").hide();
+		$(".bookJourney").html("<h3>About Us</h3><p>Hi Welcome to Reading Parks. We are a community of book lovers who share our love for books by reading and exchanging books in local parks. We help you find parks for reading and exchanging books, follow the journeys of books, and also sharing your own books. We believe sharing and discussing is the best way to treat our favourite books.</p><p>We collected and analysed open data on parks and books from the Brisbane City Council and the Open Library databases, in conjunction with user generated data, in order to provide you all the information you need to find books you like to read at the best location and time.</p><p>Don't believe our words? Why not give it a try now! Click on <b>Near me</b> tab to find books around you, or <b>My Book</b> if you have some books you would like to share with others in our community. Have fun reading!</p>").show();
+
+		$(".bookJourney").append("<p></p><p>Powered by</p><img src='images/bnelogo.png' /><img src='images/openlibrary.png' /></p><p></p><p>Please note: this website has been designed and optimised on Google Chrome and OSX platforms only. Please, if possible, switch to a similar solution to enjoy the experience at its best. </p>");
+
+	});
+
+	$("#explore").click(function() {
+
+		$("ul li a").removeClass("active");
+		$("#explore").addClass("active");
+		$(".newBookForm").hide();
+		$(".bookUp").hide();
+		$(".bookJourney").html("").show();
+
+		$.getJSON("/parks/index.php?mostPopular=true", function(d) {
+
+			$(".bookJourney").append("<h3>Most reviewed books</h3>");
+			$(".bookJourney").append("<div id='reviewed'></div>");
+
+			//console.log(d);
+			var data = d.books;
+			var parks = d.parks;
+			for (var i = 0; i < data.length && i < 3; i++) {
+				console.log(data[i]);
+
+				var bookPosition = {
+					lat: data[i].Latitude,
+					lon: data[i].Longitude
+				};
+
+				var dist = getDistance(mePosition, bookPosition);
+				if (dist) {
+					dist = "<span class='author'>" + getDistance(mePosition, bookPosition) + "m away</span><br>";
+				} else {
+					dist = "";
+				}
+
+				$("#reviewed").append("<div class='bookStep' id='book-" + data[i].bookID + "'><div class='imgBookUp'><img src='" + data[i].coverImage + "' /></div> <div class='bookUpDetails'><span class='title'>" + data[i].Title + "</span><br><span class='author'>by " + data[i].Author + "</span><br>" + dist + "</div><div class='journey'></div></div>");
+				var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'];
+				for (var j = 0; j < data.length; j++) {
+					if (data[j].bookID == data[i].bookID) {
+						if (data[j].ReviewAuthor != undefined) {
+							var rDate = new Date(data[j].reviewDate);
+							$("#book-" + data[j].bookID + " .journey").append("<div class='journeyElement'><span class='title'>Review by " + data[j].ReviewAuthor + "</span><br><span class='location'> Left on the " + rDate.getDate() + " of " + months[rDate.getMonth()] + " at " + autocase(data[j].locationInfo) + "</span><br><span class='description'>" + data[j].Review + "</span></div>");
+
+						}
+					}
+				}
+			}
+
+			$(".bookJourney").append("<h3 style='margin-top: 20px;'>Hot reading spots</h3>");
+			$(".bookJourney").append("<div id='hotparks'></div>");
+
+			for (var i = 0; i < parks.length && i < 3; i++) {
+				console.log(data[i]);
+
+				var parkPosition = {
+					lat: parks[i].LATITUDE,
+					lon: parks[i].LONGITUDE
+				};
+
+				var dist = getDistance(mePosition, parkPosition);
+				if (dist) {
+					dist = "<span class='author'>" + getDistance(mePosition, parkPosition) + "m away</span><br>";
+				} else {
+					dist = "";
+				}
+
+				$("#hotparks").append("<div class='bookStep park'><div class='bookUpDetails'><span class='title'>" + autocase(parks[i].PARK_NAME) + "</span><br>" + dist + "</div></div>");
+			}
+
+		});
 
 	});
 
